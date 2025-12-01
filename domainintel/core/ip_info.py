@@ -5,7 +5,7 @@ IP address information and geolocation functionality.
 import requests
 from typing import Dict, Any, Optional
 
-from dnsintel.utils.output import print_info, print_success, print_error
+from domainintel.utils.output import print_info, print_success, print_error
 
 
 def get_ip_info(ip_address: str) -> Dict[str, Any]:
@@ -69,7 +69,7 @@ def get_reverse_dns(ip_address: str) -> Optional[str]:
     Returns:
         Hostname if found, None otherwise
     """
-    from dnsintel.core.dns_lookup import reverse_lookup
+    from domainintel.core.dns_lookup import reverse_lookup
     return reverse_lookup(ip_address)
 
 

@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """
-Command-line interface for DNSIntel.
+Command-line interface for DomainIntel.
 """
 
 import argparse
 import sys
 
-from dnsintel.core import dns_lookup, whois_lookup, ssl_checker, ip_info, verifier
-from dnsintel.utils.output import print_header, print_success, print_error, print_info, print_warning
-from dnsintel.utils.validators import is_valid_domain, is_valid_ip
+from domainintel.core import dns_lookup, whois_lookup, ssl_checker, ip_info, verifier
+from domainintel.utils.output import print_header, print_success, print_error, print_info, print_warning
+from domainintel.utils.validators import is_valid_domain, is_valid_ip
 
 
 def setup_parser() -> argparse.ArgumentParser:
     """Set up command-line argument parser."""
     parser = argparse.ArgumentParser(
-        prog="dnsintel",
-        description="DNS Intelligence and Reconnaissance Tool",
+        prog="domainintel",
+        description="Domain Intelligence and Reconnaissance Tool",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
 
@@ -139,7 +139,7 @@ def handle_mx_command(args: argparse.Namespace) -> int:
                 for i, mx in enumerate(mx_records, 1):
                     print_info(f"  {i}. Priority: {mx['priority']:3d} → {mx['exchange']}")
                 
-                print_info(f"\n  Tip: Use 'dnsintel mx {args.domain} --full' for complete email configuration")
+                print_info(f"\n  Tip: Use 'domainintel mx {args.domain} --full' for complete email configuration")
             else:
                 print_error("\nNo MX records found!")
                 print_info("  This domain may not be configured to receive email.")
@@ -304,4 +304,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

@@ -4,8 +4,8 @@ Domain verification and security checks functionality.
 
 from typing import Dict, Any, List
 
-from dnsintel.core import dns_lookup, ssl_checker
-from dnsintel.utils.output import print_info, print_success, print_error, print_warning
+from domainintel.core import dns_lookup, ssl_checker
+from domainintel.utils.output import print_info, print_success, print_error, print_warning
 
 
 def verify_domain(domain: str) -> Dict[str, Any]:

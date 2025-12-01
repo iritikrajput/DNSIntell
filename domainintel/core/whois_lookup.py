@@ -6,7 +6,7 @@ import whois
 from typing import Dict, Any, Optional
 from datetime import datetime
 
-from dnsintel.utils.output import print_info, print_success, print_error
+from domainintel.utils.output import print_info, print_success, print_error
 
 
 def get_naive_datetime(dt: datetime) -> datetime:

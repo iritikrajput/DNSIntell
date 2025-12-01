@@ -7,7 +7,7 @@ import ssl
 from datetime import datetime, timezone
 from typing import Dict, Any, Optional
 
-from dnsintel.utils.output import print_info, print_success, print_error, print_warning
+from domainintel.utils.output import print_info, print_success, print_error, print_warning
 
 
 def get_utc_now() -> datetime:

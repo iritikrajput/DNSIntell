@@ -1,9 +1,9 @@
 """
-Basic tests for DNSIntel package.
+Basic tests for DomainIntel package.
 """
 
 import pytest
-from dnsintel.utils.validators import (
+from domainintel.utils.validators import (
     is_valid_domain,
     is_valid_ip,
     is_valid_ipv4,
@@ -106,7 +106,7 @@ class TestDNSLookup:
 
     def test_import_dns_lookup(self):
         """Test importing dns_lookup module."""
-        from dnsintel.core import dns_lookup
+        from domainintel.core import dns_lookup
         assert hasattr(dns_lookup, "query_domain")
         assert hasattr(dns_lookup, "reverse_lookup")
         assert hasattr(dns_lookup, "get_nameservers")
@@ -115,7 +115,7 @@ class TestDNSLookup:
 
     def test_mx_records_structure(self):
         """Test MX records return proper structure."""
-        from dnsintel.core import dns_lookup
+        from domainintel.core import dns_lookup
         
         # Test with a known domain (gmail.com has MX records)
         mx_records = dns_lookup.get_mx_records("gmail.com")
@@ -134,7 +134,7 @@ class TestDNSLookup:
 
     def test_mail_configuration_structure(self):
         """Test mail configuration check returns proper structure."""
-        from dnsintel.core import dns_lookup
+        from domainintel.core import dns_lookup
         
         config = dns_lookup.check_mail_configuration("example.com")
         
@@ -158,7 +158,7 @@ class TestWhoisLookup:
 
     def test_import_whois_lookup(self):
         """Test importing whois_lookup module."""
-        from dnsintel.core import whois_lookup
+        from domainintel.core import whois_lookup
         assert hasattr(whois_lookup, "get_whois")
         assert hasattr(whois_lookup, "display_results")
 
@@ -168,7 +168,7 @@ class TestSSLChecker:
 
     def test_import_ssl_checker(self):
         """Test importing ssl_checker module."""
-        from dnsintel.core import ssl_checker
+        from domainintel.core import ssl_checker
         assert hasattr(ssl_checker, "check_certificate")
         assert hasattr(ssl_checker, "display_results")
 
@@ -178,14 +178,14 @@ class TestIPInfo:
 
     def test_import_ip_info(self):
         """Test importing ip_info module."""
-        from dnsintel.core import ip_info
+        from domainintel.core import ip_info
         assert hasattr(ip_info, "get_ip_info")
         assert hasattr(ip_info, "display_results")
         assert hasattr(ip_info, "is_private_ip")
 
     def test_is_private_ip(self):
         """Test private IP detection."""
-        from dnsintel.core.ip_info import is_private_ip
+        from domainintel.core.ip_info import is_private_ip
         
         # Private IPs
         assert is_private_ip("192.168.1.1") is True
@@ -203,7 +203,7 @@ class TestVerifier:
 
     def test_import_verifier(self):
         """Test importing verifier module."""
-        from dnsintel.core import verifier
+        from domainintel.core import verifier
         assert hasattr(verifier, "verify_domain")
         assert hasattr(verifier, "display_results")
 
@@ -213,16 +213,15 @@ class TestPackage:
 
     def test_package_import(self):
         """Test importing the main package."""
-        import dnsintel
-        assert hasattr(dnsintel, "__version__")
-        assert hasattr(dnsintel, "dns_lookup")
-        assert hasattr(dnsintel, "whois_lookup")
-        assert hasattr(dnsintel, "ssl_checker")
-        assert hasattr(dnsintel, "ip_info")
-        assert hasattr(dnsintel, "verifier")
+        import domainintel
+        assert hasattr(domainintel, "__version__")
+        assert hasattr(domainintel, "dns_lookup")
+        assert hasattr(domainintel, "whois_lookup")
+        assert hasattr(domainintel, "ssl_checker")
+        assert hasattr(domainintel, "ip_info")
+        assert hasattr(domainintel, "verifier")
 
     def test_version(self):
         """Test package version."""
-        import dnsintel
-        assert dnsintel.__version__ == "0.1.0"
-
+        import domainintel
+        assert domainintel.__version__ == "0.1.0"

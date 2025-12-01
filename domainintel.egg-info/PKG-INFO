@@ -1,3 +1,42 @@
+Metadata-Version: 2.4
+Name: domainintel
+Version: 0.1.0
+Summary: A comprehensive domain intelligence and reconnaissance tool
+Home-page: https://github.com/yourusername/domainintel
+Author: Your Name
+Author-email: Your Name <your.email@example.com>
+License: MIT
+Project-URL: Homepage, https://github.com/yourusername/domainintel
+Project-URL: Documentation, https://github.com/yourusername/domainintel#readme
+Project-URL: Repository, https://github.com/yourusername/domainintel
+Project-URL: Bug Tracker, https://github.com/yourusername/domainintel/issues
+Keywords: dns,domain,whois,ssl,security,reconnaissance,osint
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: dnspython>=2.3.0
+Requires-Dist: python-whois>=0.8.0
+Requires-Dist: cryptography>=41.0.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: colorama>=0.4.6
+Requires-Dist: tabulate>=0.9.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.1.0; extra == "dev"
+Requires-Dist: black>=23.7.0; extra == "dev"
+Requires-Dist: flake8>=6.1.0; extra == "dev"
+Requires-Dist: mypy>=1.5.0; extra == "dev"
+Dynamic: license-file
+
 # DomainIntel
 
 A comprehensive domain intelligence and reconnaissance tool for security professionals and system administrators.
@@ -238,4 +277,3 @@ Your Name - your.email@example.com
 - [dnspython](https://www.dnspython.org/) - DNS toolkit for Python
 - [python-whois](https://pypi.org/project/python-whois/) - WHOIS lookup library
 - [colorama](https://pypi.org/project/colorama/) - Cross-platform colored terminal text
-# DomainIntel

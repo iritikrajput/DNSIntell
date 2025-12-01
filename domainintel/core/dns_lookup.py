@@ -6,7 +6,7 @@ import dns.resolver
 import dns.reversename
 from typing import Dict, List, Any, Optional
 
-from dnsintel.utils.output import print_info, print_success, print_error
+from domainintel.utils.output import print_info, print_success, print_error
 
 
 def query_domain(domain: str, record_type: str = "A") -> Dict[str, Any]:
