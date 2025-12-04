@@ -231,11 +231,11 @@ This tool is intended for legitimate security research and system administration
 
 ## Author
 
-Your Name - netscafeeee@gmail.com
+Your Name - RITIK RAJPUT
+Contact me at netscafeeee@gmail.com
 
 ## Acknowledgments
 
 - [dnspython](https://www.dnspython.org/) - DNS toolkit for Python
 - [python-whois](https://pypi.org/project/python-whois/) - WHOIS lookup library
 - [colorama](https://pypi.org/project/colorama/) - Cross-platform colored terminal text
-# DomainIntel
