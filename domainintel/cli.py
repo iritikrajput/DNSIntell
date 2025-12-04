@@ -6,7 +6,7 @@ Command-line interface for DomainIntel.
 import argparse
 import sys
 
-from domainintel.core import dns_lookup, whois_lookup, ssl_checker, ip_info, verifier
+from domainintel.core import dns_lookup, whois_lookup, ssl_checker, ip_info, verifier, subdomain_finder
 from domainintel.utils.output import print_header, print_success, print_error, print_info, print_warning
 from domainintel.utils.validators import is_valid_domain, is_valid_ip
 
@@ -59,6 +59,35 @@ def setup_parser() -> argparse.ArgumentParser:
     # Domain verification command
     verify_parser = subparsers.add_parser("verify", help="Verify domain configuration")
     verify_parser.add_argument("domain", help="Domain name to verify")
+
+    # Subdomain finder command
+    sub_parser = subparsers.add_parser("subdomains", help="Find subdomains")
+    sub_parser.add_argument("domain", help="Domain name to search")
+    sub_parser.add_argument(
+        "-v", "--verbose",
+        action="store_true",
+        help="Show detailed output with all IPs and CNAMEs"
+    )
+    sub_parser.add_argument(
+        "--no-crtsh",
+        action="store_true",
+        help="Skip Certificate Transparency lookup (crt.sh)"
+    )
+    sub_parser.add_argument(
+        "--no-bruteforce",
+        action="store_true",
+        help="Skip DNS bruteforce"
+    )
+    sub_parser.add_argument(
+        "-w", "--wordlist",
+        help="Custom wordlist file for bruteforcing"
+    )
+    sub_parser.add_argument(
+        "-t", "--threads",
+        type=int,
+        default=10,
+        help="Number of threads for DNS resolution (default: 10)"
+    )
 
     # All-in-one command
     all_parser = subparsers.add_parser("all", help="Get all available information")
@@ -216,6 +245,40 @@ def handle_verify_command(args: argparse.Namespace) -> int:
         return 1
 
 
+def handle_subdomains_command(args: argparse.Namespace) -> int:
+    """Handle subdomain finder command."""
+    if not is_valid_domain(args.domain):
+        print_error(f"Invalid domain name: {args.domain}")
+        return 1
+
+    print_header(f"Subdomain Discovery: {args.domain}")
+    print_info("Searching for subdomains... This may take a moment.\n")
+    
+    try:
+        # Load custom wordlist if provided
+        wordlist = None
+        if args.wordlist:
+            wordlist = subdomain_finder.load_wordlist(args.wordlist)
+            if not wordlist:
+                print_warning(f"Could not load wordlist from {args.wordlist}, using default")
+                wordlist = None
+            else:
+                print_info(f"Loaded {len(wordlist)} entries from custom wordlist\n")
+        
+        results = subdomain_finder.find_subdomains(
+            args.domain,
+            use_crtsh=not args.no_crtsh,
+            use_bruteforce=not args.no_bruteforce,
+            wordlist=wordlist,
+            threads=args.threads
+        )
+        subdomain_finder.display_results(results, verbose=args.verbose)
+        return 0
+    except Exception as e:
+        print_error(f"Subdomain discovery failed: {e}")
+        return 1
+
+
 def handle_all_command(args: argparse.Namespace) -> int:
     """Handle all-in-one command."""
     target = args.target
@@ -290,6 +353,7 @@ def main() -> None:
         "ssl": handle_ssl_command,
         "ip": handle_ip_command,
         "verify": handle_verify_command,
+        "subdomains": handle_subdomains_command,
         "all": handle_all_command,
     }
 

@@ -18,6 +18,7 @@ domainintel/core/__init__.py
 domainintel/core/dns_lookup.py
 domainintel/core/ip_info.py
 domainintel/core/ssl_checker.py
+domainintel/core/subdomain_finder.py
 domainintel/core/verifier.py
 domainintel/core/whois_lookup.py
 domainintel/core/__pycache__/__init__.cpython-313.pyc

@@ -6,7 +6,7 @@ __version__ = "0.1.0"
 __author__ = "Your Name"
 __email__ = "your.email@example.com"
 
-from domainintel.core import dns_lookup, whois_lookup, ssl_checker, ip_info, verifier
+from domainintel.core import dns_lookup, whois_lookup, ssl_checker, ip_info, verifier, subdomain_finder
 
 __all__ = [
     "dns_lookup",
@@ -14,4 +14,5 @@ __all__ = [
     "ssl_checker",
     "ip_info",
     "verifier",
+    "subdomain_finder",
 ]

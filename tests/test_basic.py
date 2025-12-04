@@ -208,6 +208,63 @@ class TestVerifier:
         assert hasattr(verifier, "display_results")
 
 
+class TestSubdomainFinder:
+    """Test subdomain finder functionality."""
+
+    def test_import_subdomain_finder(self):
+        """Test importing subdomain_finder module."""
+        from domainintel.core import subdomain_finder
+        assert hasattr(subdomain_finder, "find_subdomains")
+        assert hasattr(subdomain_finder, "get_subdomains_from_crtsh")
+        assert hasattr(subdomain_finder, "bruteforce_subdomains")
+        assert hasattr(subdomain_finder, "resolve_subdomain")
+        assert hasattr(subdomain_finder, "display_results")
+        assert hasattr(subdomain_finder, "load_wordlist")
+        assert hasattr(subdomain_finder, "COMMON_SUBDOMAINS")
+
+    def test_common_subdomains_wordlist(self):
+        """Test that common subdomains wordlist is populated."""
+        from domainintel.core.subdomain_finder import COMMON_SUBDOMAINS
+        
+        assert isinstance(COMMON_SUBDOMAINS, list)
+        assert len(COMMON_SUBDOMAINS) > 50  # Should have a decent number
+        assert "www" in COMMON_SUBDOMAINS
+        assert "mail" in COMMON_SUBDOMAINS
+        assert "api" in COMMON_SUBDOMAINS
+        assert "admin" in COMMON_SUBDOMAINS
+
+    def test_find_subdomains_structure(self):
+        """Test find_subdomains returns proper structure."""
+        from domainintel.core import subdomain_finder
+        
+        # Test with bruteforce only (faster for testing)
+        results = subdomain_finder.find_subdomains(
+            "example.com",
+            use_crtsh=False,
+            use_bruteforce=True,
+            wordlist=["www", "mail"],  # Small wordlist for speed
+            threads=2
+        )
+        
+        # Check structure
+        assert isinstance(results, dict)
+        assert "domain" in results
+        assert "subdomains" in results
+        assert "total_found" in results
+        assert "sources" in results
+        assert "errors" in results
+        
+        # Check types
+        assert isinstance(results["subdomains"], list)
+        assert isinstance(results["total_found"], int)
+        assert isinstance(results["sources"], dict)
+        assert isinstance(results["errors"], list)
+        
+        # Check sources structure
+        assert "crtsh" in results["sources"]
+        assert "bruteforce" in results["sources"]
+
+
 class TestPackage:
     """Test package-level functionality."""
 
@@ -220,6 +277,7 @@ class TestPackage:
         assert hasattr(domainintel, "ssl_checker")
         assert hasattr(domainintel, "ip_info")
         assert hasattr(domainintel, "verifier")
+        assert hasattr(domainintel, "subdomain_finder")
 
     def test_version(self):
         """Test package version."""
