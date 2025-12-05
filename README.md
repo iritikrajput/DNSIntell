@@ -233,7 +233,7 @@ This tool is intended for legitimate security research and system administration
 
 Your Name - RITIK RAJPUT,
 
-Contact me at netscafeeee@gmail.com
+Contact/Ask me at netscafeeee@gmail.com
 
 ## Acknowledgments
 
